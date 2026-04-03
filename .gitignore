@@ -11,6 +11,7 @@ Thumbs.db
 # Adatmappák ignorálása
 f1data-bronze/
 test_data/
+*.json
 
 # Python cache és logok ignorálása
 __pycache__/
