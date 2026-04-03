@@ -7,3 +7,11 @@ node_modules
 # OS files
 .DS_Store
 Thumbs.db
+
+# Adatmappák ignorálása
+f1data-bronze/
+test_data/
+
+# Python cache és logok ignorálása
+__pycache__/
+*.log
