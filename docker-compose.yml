@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  f1-spark-engine:
+    build: .
+    container_name: f1-elo-engine
+    # Ez a legfontosabb sor: összeköti a te VS Code mappádat a konténer /app mappájával
+    volumes:
+      - .:/app
+    # A konténer életben tartása, amíg mi bele nem lépünk futtatni
+    command: tail -f /dev/null

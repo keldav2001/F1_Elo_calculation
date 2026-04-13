@@ -1,36 +1,18 @@
-import logging
-import time
 import os
-import glob
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, to_date
+from delta import configure_spark_with_delta_pip
 
 
-# Saját modulok importálása
+from config_loader import load_config
 
-from config_loader import load_config  
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-logger = logging.getLogger("F1_Silver_Pipeline")
-
-
-def main():
-    logger.info("--- F1 Bronze Pipeline Indítása ---")
+def get_spark_session() -> SparkSession:
+    """Spark session inicializálása Delta Lake támogatással."""
+    print("Spark Session indítása...")
+    builder = SparkSession.builder \
+        .appName("F1_ELO_Silver_Layer") \
+        .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
+        .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
+        .config("spark.driver.memory", "4g")
     
-    # Központosított konfiguráció betöltése
-    config = load_config()
-    if not config:
-        logger.critical("Kritikus hiba a konfiguráció betöltésekor. Leállás.")
-        return
-
-    bronze_path = config["storage"]["bronze_path"]
-    silver_path = config["storage"]["silver_path"]
-    start_year = config["pipeline"]["start_year"]
-    end_year = config["pipeline"]["end_year"]
-    endpoints = config["pipeline"]["endpoints"]
-    print("HELLO")
-
-if __name__ == "__main__":
-    main()
+    return configure_spark_with_delta_pip(builder).getOrCreate()
