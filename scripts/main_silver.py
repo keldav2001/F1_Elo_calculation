@@ -30,7 +30,7 @@ def main():
     start_year = config["pipeline"]["start_year"]
     end_year = config["pipeline"]["end_year"]
     endpoints = config["pipeline"]["endpoints"]
-
+    print("HELLO")
 
 if __name__ == "__main__":
     main()
