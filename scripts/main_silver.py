@@ -2,7 +2,7 @@ import logging
 import time
 import os
 import glob
-import pandas as pd
+
 
 # Saját modulok importálása
 
@@ -31,10 +31,6 @@ def main():
     end_year = config["pipeline"]["end_year"]
     endpoints = config["pipeline"]["endpoints"]
 
-    files = f"{bronze_path}/{endpoints[0]}/*.json"
-
-
-    print(files)
 
 if __name__ == "__main__":
     main()
