@@ -5,7 +5,7 @@
         "timeout": 10
     },
     "pipeline": {
-        "start_year": 2000,
+        "start_year": 2020,
         "end_year": 2025,
         "endpoints": [
             "drivers",
@@ -13,6 +13,7 @@
         ]
     },
     "storage": {
-        "base_path": "../f1data-bronze"
+        "bronze_path": "../f1data-bronze",
+        "silver_path": "../f1data-silver"
     }
 }
